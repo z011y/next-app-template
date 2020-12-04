@@ -1,11 +1,10 @@
-import Layout from "../components/layout";
-
 import styled from "styled-components";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <Layout>
-      <div>main</div>
-    </Layout>
+    <div>
+      <p>main</p>
+    </div>
   );
 }

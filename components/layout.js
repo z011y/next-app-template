@@ -1,8 +1,24 @@
 import Head from "next/head";
-
 import styled from "styled-components";
+import { useEffect } from "react";
 
-export default function Layout({ children }) {
+import ThemeToggle from "./themeToggle";
+
+export default function Layout({
+  children,
+  toggleTheme,
+  darkTheme,
+  rehydrateTheme,
+}) {
+  useEffect(() => {
+    const cachedTheme = localStorage.getItem("darkTheme");
+    console.log(cachedTheme);
+    console.log(darkTheme);
+    if (cachedTheme !== darkTheme.toString()) {
+      rehydrateTheme();
+    }
+  }, []);
+
   return (
     <div>
       <Head>
@@ -10,7 +26,10 @@ export default function Layout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header>header</Header>
+      <Header>
+        header
+        <ThemeToggle toggleTheme={toggleTheme} darkTheme={darkTheme} />
+      </Header>
 
       <Main>{children}</Main>
 
@@ -26,7 +45,6 @@ const Header = styled.header`
   width: 100%;
   height: 50px;
   z-index: 100;
-  background-color: white;
 `;
 
 const Main = styled.main`
